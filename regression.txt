@@ -1,0 +1,48 @@
+Name: Anwar Shaik Mohammed
+R project Decision Tree
+
+#For Regression Tree
+----------------------
+> library(MASS)
+> attach(Boston)
+> library(tree)
+> set.seed(1)
+> train = sample(1:nrow(Boston),)
+> train = sample(1:nrow(Boston),+ nrow(Boston)/2)
+> test = -train
+> training_data = Boston[train,]
+> testing_data = Boston[test,]
+> testing_medv = medv[test]
+> head(Boston)
+
+
+> ## fit a tree based on training data
+> tree_model = tree(medv~., training_data)
+> tree_model
+
+
+> plot(tree_model)
+> text(tree_model)
+> ##check how the model is doing using the testing dataset
+> tree_pred = predict(tree_model, testing_data)
+> mean((tree_pred - testing_medv)^2) # mean square error
+
+> ## cross validation for pruning the tree
+> cv_tree = cv.tree(tree_model)
+> names(cv_tree)
+
+
+plot(cv_tree$size, cv_tree$dev, type = "b", xlab = "tree size", ylab = "MSE")
+> which.min(cv_tree$dev)
+
+
+> cv_tree$size[1]
+
+> ##prune the tree to size 4
+> pruned_model = prune.tree(tree_model, best = 4)
+> plot(pruned_model)
+> text(pruned_model)
+> ##checking the accuracy of the model using testing data
+
+> tree_pred = predict(pruned_model, testing_data)
+> mean((tree_pred - testing_medv)^2)

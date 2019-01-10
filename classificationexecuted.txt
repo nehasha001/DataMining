@@ -1,0 +1,72 @@
+NAME: NEHA SHAIK
+R project : Decision Tree
+
+#Code For Classification Tree:-
+-------------------------------
+
+install.packages(c("ISLR", "tree"))
+library(ISLR)  ##Book’s library
+library(tree)  ## To fit decision trees
+attach (Carseats)  ## Dataset to use
+head (Carseats)
+
+## Start data manipulation
+head(Carseats)
+  
+range(Sales)   ##Sales Range From 0 to 16.
+
+
+## Create Categorial Variables bases  on sales
+High = ifelse(Sales >--8 , "Yes","No")
+length(High)
+[1] 400
+
+##Appends  High to Carseat dataset and now  our dataset will be ready.
+dim(Carseats)
+[1] 400  11
+
+Carseats = data.frame(Carseats , High)
+names(Carseats)
+
+## Splitting data into testing and training sets using-
+set.seed(2)
+train = sample(1:nrow(Carseats),nrow(Carseats)/2)
+test= -train
+training_data = Carseats[train,]
+testing_data= Carseats[test,]
+testing_High =High[test]
+
+## Fit the Tree Model using Training Data.
+tree_model = tree(High~., training_data)
+plot(tree_model)
+text(tree_model, pretty =0)
+
+## Check How The Model Is doing Using Test Data.
+tree_pred = predict(tree_model,testing_data, type='class')
+mean(tree_pred != testing_High)     ##28.5%
+[1] 0.285
+
+##Cross validation to check  where to stop pruning
+ set.seed(3)
+ cv_tree = cv.tree(tree_model, FUN = prune.misclass)
+ names(cv_tree)
+[1] "size"   "dev"    "k"      "method"
+
+plot(cv_tree$size , cv_tree$dev, type = 'b')
+
+##Prune The Tree
+
+pruned_model = prune.misclass(tree_model, best=9)
+plot(pruned_model)
+text(pruned_model, pretty=0)
+tree_pred = predict(pruned_model,testing_data, type='class')
+mean(tree_pred != testing_High)
+
+[1] 0.23
+
+23% here is the pruned best accuracy.
+
+
+
+
+
