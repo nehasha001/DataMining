@@ -1,0 +1,11 @@
+library(MASS)  #Book’s library.
+attach(Boston) #dataset used. 
+library(tree) 
+set.seed(1)
+ train = sample(1:nrow(Boston),)
+ train = sample(1:nrow(Boston),+ nrow(Boston)/2)
+ test = -train
+ training_data = Boston[train,]
+ testing_data = Boston[test,]
+ testing_medv = medv[test]
+ head(Boston)
