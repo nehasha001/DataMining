@@ -1,0 +1,18 @@
+install.packages(c("ISLR", "tree"))
+library(ISLR)  ##Book’s library
+ library(tree)  ## To fit decision trees
+ attach (Carseats)  ## Dataset to use
+ head (Carseats)
+## Start data manipulation
+range(Sales)      
+## Create Categorial Variables bases  on sales
+High = ifelse(Sales >--8 , "Yes","No")
+length(High)
+dim(Carseats)
+
+
+
+
+
+
+                          
