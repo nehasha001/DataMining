@@ -1,0 +1,15 @@
+##Appends Vector High to previous Carseat dataset and now  our dataset will be ready.(Overriding the previous carseat dataset)
+Carseats = data.frame(Carseats , High)
+ names(Carseats)
+
+Carseats = Carseats[,-1]
+ names(Carseats)
+## Splitting data into testing and training sets using-
+ set.seed(2)
+ train = sample(1:nrow(Carseats),nrow(Carseats)/2)
+ test= -train
+ training_data = Carseats[train,]
+ testing_data= Carseats[test,]
+ testing_High =High[test]
+
+
