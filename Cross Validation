@@ -1,0 +1,19 @@
+## Fit the Tree Model using Training Data.
+tree_model = tree(High~., training_data)
+plot(tree_model)
+text(tree_model, pretty =0)
+
+## Check How The Model Is doing Using Test Data.
+
+tree_pred = predict(tree_model,testing_data, type='class')
+mean(tree_pred != testing_High)
+
+##Cross Validation To Check  Where To Stop Pruning.
+
+set.seed(3)
+cv_tree = cv.tree(tree_model, FUN = prune.misclass)
+names(cv_tree)
+plot(cv_tree$size , cv_tree$dev, type = 'b')
+
+
+
