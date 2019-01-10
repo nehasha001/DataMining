@@ -1,0 +1,2 @@
+# DataMining
+Regression and Classification: By using R, analysed decision tree which is a predictive model that maps an observation about an item to its conclusions about item’s target value. It is one of the predictive modelling approaches used in statistics, data mining and machine learning. Used packages "ISLR" and "Carseats" dataset for classification.Basically we have three data sets: Training, Testing and Validation. Then split data into testing and training sets. Cross validated to check where to stop pruning. For regression used package "MASS" and dataset "Boston".
